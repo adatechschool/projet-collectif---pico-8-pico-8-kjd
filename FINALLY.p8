@@ -24,14 +24,16 @@ function _init2()
  bullet={}
  map(0,0,0,0)
 		cls()
-		rect(10,120,120,50,6)
+		rect(4,0,124,40,6)
 		spr(192,10,5,4,4)
-		spr(200,50,5,4,4)
+		spr(140,50,5,4,4)
 		spr(204,90,5,4,4)
-		print("game over ...",30,60,8)
-		print(" try again ?.",30,70,8)
-		print("michonne's zombalad",30,80,8)
-		print("press ❎ to restart",30,90,8)
+		print("game over ...",40,50,8)
+		print("your score is ",40,60,8)
+		print(score,60,70,8)
+		print(" try again ?",40 ,80,8)
+		print("michonne's zombalad",30,90,8)
+		print("press ❎ to restart",30,100,8)
 end
 	-- update principal game and intro
 
@@ -42,7 +44,6 @@ function _update60()
 		player_movement()
 		update_bullet()
 		player_death()
-	
 end 
 		
 
@@ -80,7 +81,7 @@ function player_death()
 	for z  in all(zombies) do
 		if z.x/8 == player.x and z.y/8 == player.y then
 			player.life-=1
-			print(player.life)
+			del(zombies,z)
 			game_over()
 		end
 	end					
@@ -90,6 +91,7 @@ function game_over()
 	if player.life==0 then
 	  sfx(1)
 	 _init2()
+	 score=0
 		end
 end
 
@@ -193,7 +195,6 @@ end
 		cls()
 		map(0,0,0,0)
 		draw_player()
-	
 	 draw_bullet()
 		draw_zombies()
 		print("score",8,2,15)
@@ -221,15 +222,7 @@ end
 		end
 	end
 	
-	function draw_end()
-		cls()
-		rect(10,120,120,50,6)
-		spr(192,10,5,4,4)
-		spr(200,50,5,4,4)
-		spr(204,90,5,4,4)
-		print("you died zemmour won...",30,60,8)
-	 print("press ❎ to re start",40,90,8)
-	end
+
 -->8
 -- zombies
 
@@ -318,7 +311,7 @@ end
 function update_zombie()
 	if #zombies<1 then 
 				spawn_zombies(1)
-			end
+	end
 end
 
 
